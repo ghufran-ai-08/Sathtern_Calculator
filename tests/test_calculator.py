@@ -12,6 +12,7 @@ from calculator import (
     get_menu_choice,
     get_number,
     multiply,
+    perform_calculation,
     subtract,
 )
 
@@ -54,6 +55,36 @@ class TestCalculatorOperations(unittest.TestCase):
         """Calculator operations should support negative values."""
 
         self.assertEqual(add(-5, 10), 5)
+
+
+class TestPerformCalculation(unittest.TestCase):
+    """Test calculation selection."""
+
+    def test_addition_choice(self):
+        """Choice 1 should perform addition."""
+
+        self.assertEqual(perform_calculation(1, 10, 5), 15)
+
+    def test_subtraction_choice(self):
+        """Choice 2 should perform subtraction."""
+
+        self.assertEqual(perform_calculation(2, 10, 5), 5)
+
+    def test_multiplication_choice(self):
+        """Choice 3 should perform multiplication."""
+
+        self.assertEqual(perform_calculation(3, 10, 5), 50)
+
+    def test_division_choice(self):
+        """Choice 4 should perform division."""
+
+        self.assertEqual(perform_calculation(4, 10, 5), 2)
+
+    def test_invalid_calculation_choice(self):
+        """Invalid calculation choices should raise ValueError."""
+
+        with self.assertRaises(ValueError):
+            perform_calculation(5, 10, 5)
 
 
 class TestCalculatorInput(unittest.TestCase):
