@@ -58,3 +58,69 @@ def get_menu_choice():
             return int(choice)
 
         print("Invalid choice. Please select an option from 1 to 5.")
+
+
+def display_menu():
+    """Display the calculator menu."""
+
+    print("\n" + "-" * 45)
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Exit")
+    print("-" * 45)
+
+def perform_calculation(choice, first_number, second_number):
+    """Perform the calculation selected by the user."""
+
+    operations = {
+        1: add,
+        2: subtract,
+        3: multiply,
+        4: divide,
+    }
+
+    operation = operations.get(choice)
+
+    if operation is None:
+        raise ValueError("Invalid calculation choice.")
+
+    return operation(first_number, second_number)
+
+
+def main():
+    """Run the calculator application."""
+
+    print("=" * 45)
+    print("          CALCULATOR APPLICATION")
+    print("=" * 45)
+
+    while True:
+        display_menu()
+        choice = get_menu_choice()
+
+        if choice == 5:
+            print("\nThank you for using Calculator Application.")
+            break
+
+        first_number = get_number("Enter first number: ")
+        second_number = get_number("Enter second number: ")
+
+        try:
+            result = perform_calculation(
+                choice,
+                first_number,
+                second_number,
+            )
+        except ValueError as error:
+            print(f"\nError: {error}")
+            continue
+
+        print("\n" + "-" * 45)
+        print(f"Result: {result}")
+        print("-" * 45)
+
+
+if __name__ == "__main__":
+    main()
